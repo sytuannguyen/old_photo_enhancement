@@ -1,9 +1,29 @@
 import streamlit as st
 import os
-import cv2
 import shutil
 import requests
 from tqdm import tqdm
+
+# Check if the necessary library is installed
+try:
+    import cv2
+except ImportError:
+    st.warning("OpenCV library is missing. Installing required libraries...")
+
+    # Install the missing library using apt-get with os.system()
+    os.system("sudo apt-get update")
+    os.system("sudo apt-get install -y libgl1-mesa-glx")
+
+    # Check again if the installation was successful
+    try:
+        import cv2
+    except ImportError:
+        st.error("Failed to install the required library. Please check your system configuration.")
+    else:
+        st.success("OpenCV library is now installed. You can proceed with your application.")
+else:
+    st.success("OpenCV library is already installed. You can proceed with your application.")
+
 
 # Function to download files using requests
 def download_file(url, local_filename):
