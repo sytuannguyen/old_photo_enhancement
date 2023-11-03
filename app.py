@@ -5,14 +5,15 @@ from PIL import Image
 # Streamlit app
 st.title("GFPGAN Image Restoration App")
 
-# Process images with GFPGAN
-os.system("git clone https://github.com/TencentARC/GFPGAN.git")
-os.chdir("GFPGAN")
-os.system("pip install -r requirements.txt")
-os.system("python setup.py develop")
-os.system("pip install realesrgan")
-os.system("python inference_gfpgan.py -i ../inputs/upload -o ../results -v 1.3 -s 2 --bg_upsampler realesrgan")
-os.chdir("..")
+if st.button("Setup GFPGAN Model"):
+    # Process images with GFPGAN
+    os.system("git clone https://github.com/TencentARC/GFPGAN.git")
+    os.chdir("GFPGAN")
+    os.system("pip install -r requirements.txt")
+    os.system("python setup.py develop")
+    os.system("pip install realesrgan")
+    os.system("python inference_gfpgan.py -i ../inputs/upload -o ../results -v 1.3 -s 2 --bg_upsampler realesrgan")
+    os.chdir("..")
 
 st.write("Upload your images and click 'Process Images' to restore them using GFPGAN.")
 
