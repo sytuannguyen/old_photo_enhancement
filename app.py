@@ -47,3 +47,5 @@ if st.button("Download Pre-trained Model"):
 # Display success message
 if os.path.exists("experiments/pretrained_models/GFPGANv1.3.pth"):
     st.write("Pre-trained model is available and ready to use.")
+
+os.chdir("/mount/src/old_photo_enhancement")
