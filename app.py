@@ -21,7 +21,7 @@ if st.button("Process Images"):
     # Clone GFPGAN and enter the GFPGAN folder
     os.system("git clone https://github.com/TencentARC/GFPGAN.git")
     os.chdir("GFPGAN")
-    st.write(os.listdir('.')
+    st.write(os.listdir('.'))
              
     # Set up the environment (install dependencies)
     os.system("pip install -r requirements.txt")
