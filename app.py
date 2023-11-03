@@ -1,6 +1,7 @@
 import os
 import streamlit as st
 import subprocess
+import requests
 
 # Streamlit UI
 st.title("GFPGAN Environment Setup")
