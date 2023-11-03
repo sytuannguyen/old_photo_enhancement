@@ -23,12 +23,26 @@ if st.button("Set Up Environment"):
     subprocess.run(["pip", "install", "realesrgan"])
     st.success("Environment set up successfully!")
 
-# Download pre-trained model
-if st.button("Download Pre-trained Model"):
+# Function to download pre-trained model
+def download_pretrained_model():
     st.text("Downloading pre-trained model...")
     model_url = "https://github.com/TencentARC/GFPGAN/releases/download/v1.3.0/GFPGANv1.3.pth"
-    subprocess.run(["wget", model_url, "-P", "experiments/pretrained_models"])
-    st.success("Pre-trained model downloaded successfully!")
+    save_path = os.path.join("experiments", "pretrained_models", "GFPGANv1.3.pth")
+    try:
+        response = requests.get(model_url, stream=True)
+        response.raise_for_status()
+        with open(save_path, 'wb') as f:
+            for chunk in response.iter_content(chunk_size=8192):
+                f.write(chunk)
+        st.success("Pre-trained model downloaded successfully!")
+    except Exception as e:
+        st.error(f"Error: {e}")
+        raise
+
+# Streamlit UI
+st.title("Download Pre-trained Model")
+if st.button("Download Pre-trained Model"):
+    download_pretrained_model()
 
 # Display success message
 if os.path.exists("experiments/pretrained_models/GFPGANv1.3.pth"):
