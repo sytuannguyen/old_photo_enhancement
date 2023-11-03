@@ -4,15 +4,17 @@ import shutil
 import requests
 from tqdm import tqdm
 
+import subprocess
+
 # Check if the necessary library is installed
 try:
     import cv2
 except ImportError:
     st.warning("OpenCV library is missing. Installing required libraries...")
 
-    # Install the missing library using apt-get with os.system()
-    os.system("sudo apt-get update")
-    os.system("sudo apt-get install -y libgl1-mesa-glx")
+    # Install the missing library using apt-get
+    subprocess.run(["sudo", "apt-get", "update"])
+    subprocess.run(["sudo", "apt-get", "install", "-y", "libgl1-mesa-glx"])
 
     # Check again if the installation was successful
     try:
